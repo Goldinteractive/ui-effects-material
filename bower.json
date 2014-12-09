@@ -1,0 +1,21 @@
+{
+  "name": "ui-effects-material",
+  "main": "index.js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/Goldinteractive/ui-effects-material",
+  "authors": [
+    "goldinteractive"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "gi-ui-buttons": "~0.1.0"
+  }
+}

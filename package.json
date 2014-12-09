@@ -1,0 +1,27 @@
+{
+  "name": "ui-effects-material",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Goldinteractive/ui-effects-material.git"
+  },
+  "author": "goldinteractive",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Goldinteractive/ui-effects-material/issues"
+  },
+  "homepage": "https://github.com/Goldinteractive/ui-effects-material",
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "gulp-6to5": "^1.0.2",
+    "gulp-watch": "^3.0.0",
+    "gulp-wrap": "^0.5.0",
+    "jshint-stylish": "^1.0.0",
+    "vinyl-transform": "^1.0.0"
+  }
+}
