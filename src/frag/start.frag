@@ -17,4 +17,3 @@
     root.Material = factory(jQuery);
   }
 }(this, function ($) {
-  'use strict';
