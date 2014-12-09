@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="style.css">
+		<style>
+			button {
+				margin:10px;
+				float:left;
+				clear:both;
+			}
+			button:before {
+				left:100%;
+				top:50%;
+				font-size: 1rem;
+				margin-left: 10px;
+				margin-top:-0.5rem;
+				position: absolute;
+				color:black;
+				content: ' class: ( 'attr(class) ' )' ;
+			}
+			i {
+				background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAYAAACoPemuAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAATVJREFUWIXtlj1Ow0AQRr9d0/oK3IG1rxG31CjiOsABInECmtBR2X12fIcoF6CgQTAfTSwRS4l3/UPDPsmF5ZnZ59XaM0AikUgk/hcmJKgsy4qkm2NBklsRkaG4q5BiqloZY9bTtQAABwDziHV474N2+BxFUTA0NkoscPFrknfGmN8vUXvv65g6s4t57/fOuXcADzg9w3VMHTunVIeIPKnqWlW/x9ZYRAwA2rZ9zrLsFsDnmPzFxABgt9u9kFyR/IjNXVQMAETkLc/zx9i8xcUAoGmar9icPxEbQxKLJeoHG9NSphIkZq3dkjyce66qlbX25nj7istNerCBA4FjzxDOuU03fZC8F5HN1JqjxPrz2aUdC52/+oxq4v35zNqTb2h1vDqC5q9ZxIbOXI9oqUQikUgsyA+n1HIzLAkSHwAAAABJRU5ErkJggg==');
+				background-repeat: no-repeat;
+				width: 38px;
+				height: 38px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Buttons</h1>
+	<button class="ui-btn">Hello</button>
+	<button class="ui-btn primary">Hello</button>
+	<button class="ui-btn secundary">Hello</button>
+	<button class="ui-btn small">Hello</button>
+	<button class="ui-btn large">Hello</button>
+	<button class="ui-btn large secundary round-corners">Hello</button>
+	<button class="ui-btn huge">Hello</button>
+	<button class="ui-btn right-icon">Hello <i></i></button>
+	<button class="ui-btn center-icon">&nbsp;<i></i></button>
+	<button class="ui-btn circle center-icon large">&nbsp;<i></i></button>
+	<button class="ui-btn left-icon">Hello <i></i></button>
+	<button class="ui-btn left-icon large">Hello <i></i></button>
+	<button class="ui-btn left-icon huge">Hello <i></i></button>
+
+	<button class="ui-btn left-icon huge white">Hello <i></i></button>
+
+	<button class="ui-btn huge bordered hoverable">Hello</button>
+
+	<button class="ui-btn huge bordered hoverable disabled rounded-corners">Hello</button>
+		<button class="ui-btn huge no-shadow">Hello</button>
+
+	<button class="ui-btn small circle"></button>
+	<button class="ui-btn circle"></button>
+	<button class="ui-btn large circle"></button>
+	<button class="ui-btn huge circle"></button>
+
+	</body>
+</html>

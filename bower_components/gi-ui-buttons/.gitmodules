@@ -1,0 +1,3 @@
+[submodule "ui-dotfiles"]
+	path = ui-dotfiles
+	url = git@github.com:Goldinteractive/ui-dotfiles.git
