@@ -79,7 +79,7 @@ class Material {
 		if (!this.supportCssAnimations) {
 			return;
 		}
-		this.$container.on(`${(_isTouch ? 'touchstart': 'click')}.material`, '.ui-effects-material', (e) => this.generateRipple(e));
+		this.$container.on(`${(_isTouch ? 'touchstart': 'mousedown')}.material`, '.ui-effects-material', (e) => this.generateRipple(e));
 	}
 	/**
 	 *  Kill the the UI touch/click events
