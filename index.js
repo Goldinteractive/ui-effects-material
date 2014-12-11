@@ -93,7 +93,7 @@ var Material = (function () {
     if (!this.supportCssAnimations) {
       return;
     }
-    this.$container.on("" + (_isTouch ? "touchstart" : "click") + ".material", ".ui-effects-material", function (e) {
+    this.$container.on("" + (_isTouch ? "touchstart" : "mousedown") + ".material", ".ui-effects-material", function (e) {
       return _this.generateRipple(e);
     });
   };
