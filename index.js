@@ -21,7 +21,7 @@
 
 "use strict";
 
-var $body = $("body"), _supportCssAnimations = (function () {
+var _supportCssAnimations = (function () {
   var el = document.createElement("Material"), animEndEvents = {
     WebkitAnimation: "webkitAnimationEnd",
     MozAnimation: "animationend",
@@ -37,45 +37,43 @@ var $body = $("body"), _supportCssAnimations = (function () {
     }
   }
   return false;
-})();
+})(), _isTouch = "ontouchstart" in window;
 
 var Material = (function () {
-  var Material = function Material() {
+  var Material = function Material($container) {
+    if ($container === undefined) $container = $("body");
     this.supportCssAnimations = _supportCssAnimations;
+    this.$container = $container;
     this.bind();
   };
 
+  Material.prototype.getCoordinates = function (e) {
+    return e.originalEvent.targetTouches ? e.originalEvent.targetTouches[0] : e;
+  };
+
   Material.prototype.generateRipple = function (e) {
-    var $el, $ripple, d, x, y, rippleWidth, rippleHeight;
+    var $el, $ripple, d, x, y, pointer;
+
+    pointer = this.getCoordinates(e);
 
     $el = $(e.currentTarget);
+    // Create the DOM node to generate the ripple effect
+    $ripple = $("<span class=\"ripple\"></span>");
 
-    //create .ripple element if it doesn't exist
-    if (!$el.find(".ripple").length) {
-      $el.prepend("<span class=\"ripple\"></span>");
-    }
+    // append it to the element clicked
+    $el.prepend($ripple);
 
-    $ripple = $el.find("> .ripple");
-    //incase of quick double clicks stop the previous animation
-    $ripple.removeClass("animate");
-
-    rippleWidth = $ripple.width();
-    rippleHeight = $ripple.height();
-
-    //set size of .ripple
-    if (!rippleWidth && !rippleHeight) {
-      //use $el's width or height whichever is larger for the diameter to make a circle which can cover the entire element.
-      d = Math.max($el.outerWidth(), $el.outerHeight());
-      $ripple.css({
-        height: d,
-        width: d
-      });
-    }
+    //use $el's width or height whichever is larger for the diameter to make a circle which can cover the entire element.
+    d = Math.max($el.outerWidth(), $el.outerHeight());
+    $ripple.css({
+      height: d,
+      width: d
+    });
 
     //get click coordinates
     //logic = click coordinates relative to page - $el's position relative to page - half of self height/width to make it controllable from the center;
-    x = e.pageX - $el.offset().left - (rippleWidth || d) / 2;
-    y = e.pageY - $el.offset().top - (rippleHeight || d) / 2;
+    x = pointer.pageX - $el.offset().left - d / 2;
+    y = pointer.pageY - $el.offset().top - d / 2;
 
     //set the position and add class .animate
     $ripple.css({
@@ -95,7 +93,7 @@ var Material = (function () {
     if (!this.supportCssAnimations) {
       return;
     }
-    $body.on("click.material", ".ui-effects-material", function (e) {
+    this.$container.on("" + (_isTouch ? "touchstart" : "click") + ".material", ".ui-effects-material", function (e) {
       return _this.generateRipple(e);
     });
   };
@@ -104,7 +102,7 @@ var Material = (function () {
     if (!this.supportCssAnimations) {
       return;
     }
-    $body.off(".material");
+    this.$container.off(".material");
   };
 
   return Material;
