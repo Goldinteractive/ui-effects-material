@@ -10,15 +10,8 @@
 			float:left;
 			clear:both;
 		}
-		button:before {
-			left:100%;
-			top:50%;
-			font-size: 1rem;
-			margin-left: 10px;
-			margin-top:-0.5rem;
-			position: absolute;
-			color:black;
-			content: ' class: ( 'attr(class) ' )' ;
+		.ui-btn {
+			background: #ddd;
 		}
 		i {
 			background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAYAAACoPemuAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAATVJREFUWIXtlj1Ow0AQRr9d0/oK3IG1rxG31CjiOsABInECmtBR2X12fIcoF6CgQTAfTSwRS4l3/UPDPsmF5ZnZ59XaM0AikUgk/hcmJKgsy4qkm2NBklsRkaG4q5BiqloZY9bTtQAABwDziHV474N2+BxFUTA0NkoscPFrknfGmN8vUXvv65g6s4t57/fOuXcADzg9w3VMHTunVIeIPKnqWlW/x9ZYRAwA2rZ9zrLsFsDnmPzFxABgt9u9kFyR/IjNXVQMAETkLc/zx9i8xcUAoGmar9icPxEbQxKLJeoHG9NSphIkZq3dkjyce66qlbX25nj7istNerCBA4FjzxDOuU03fZC8F5HN1JqjxPrz2aUdC52/+oxq4v35zNqTb2h1vDqC5q9ZxIbOXI9oqUQikUgsyA+n1HIzLAkSHwAAAABJRU5ErkJggg==');
@@ -45,12 +38,12 @@
 	</div>
 
 	<h2>On the Buttons</h2>
-	<button class="ui-btn ui-effects-material">Hello</button>
-	<button class="ui-btn ui-effects-material primary">Hello</button>
-	<button class="ui-btn ui-effects-material secundary">Hello</button>
+	<button class="ui-btn ui-effects-material hoverable">Hello</button>
+	<button class="ui-btn ui-effects-material primary hoverable">Hello</button>
+	<button class="ui-btn ui-effects-material secundary hoverable">Hello</button>
 	<button class="ui-btn ui-effects-material small">Hello</button>
 	<button class="ui-btn ui-effects-material large">Hello</button>
-	<button class="ui-btn ui-effects-material large secundary round-corners">Hello</button>
+	<button class="ui-btn ui-effects-material large secundary round-corners hoverable">Hello</button>
 	<button class="ui-btn ui-effects-material huge">Hello</button>
 	<button class="ui-btn ui-effects-material right-icon">Hello <i></i></button>
 	<button class="ui-btn ui-effects-material center-icon">&nbsp;<i></i></button>
@@ -59,17 +52,17 @@
 	<button class="ui-btn ui-effects-material left-icon large">Hello <i></i></button>
 	<button class="ui-btn ui-effects-material left-icon huge">Hello <i></i></button>
 
-	<button class="ui-btn ui-effects-material dark-ripple left-icon huge white">Hello <i></i></button>
+	<button class="ui-btn ui-effects-material left-icon huge white">Hello <i></i></button>
 
 	<button class="ui-btn ui-effects-material huge bordered hoverable">Hello</button>
 
 	<button class="ui-btn ui-effects-material huge bordered hoverable disabled rounded-corners">Hello</button>
-	<button class="ui-btn ui-effects-material huge no-shadow">Hello</button>
+		<button class="ui-btn ui-effects-material huge no-shadow hoverable">Hello</button>
 
 	<button class="ui-btn ui-effects-material small circle"></button>
 	<button class="ui-btn ui-effects-material circle"></button>
 	<button class="ui-btn ui-effects-material large circle"></button>
-	<button class="ui-btn ui-effects-material huge circle"></button>
+	<button class="ui-btn ui-effects-material huge circle no-shadow hoverable center-icon"><i></i></button>
 	<script src="bower_components/jquery/dist/jquery.js"></script>
 	<script src="index.js"></script>
 	<script>
