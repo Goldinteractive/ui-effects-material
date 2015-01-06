@@ -4,9 +4,9 @@
 $icon-size: 38px !default;
 
 // Colors
-$button-bg-primary: red !default;
-$button-text-primary: black !default;
-$button-bg-secundary: blue !default;
+$button-bg-primary: #0075a2 !default;
+$button-text-primary: white !default;
+$button-bg-secundary: #999 !default;
 $button-text-secundary: white !default;
 
 // Shaddow
@@ -18,21 +18,21 @@ $button-shadow-color: black !default;
 $button-shadow-color-opacity: 0.4 !default;
 
 // Padding
-$button-default-padding: 0.5rem 1.2rem !default;
+$button-default-padding: 0.65rem 1.2rem !default;
 
-$button-small-padding: 0.2rem 0.8rem !default;
-$button-large-padding: 1rem 3.5rem !default;
-$button-huge-padding: 1.5rem 4rem !default;
+$button-small-padding: 0.3rem 0.8rem !default;
+$button-large-padding: 1.15rem 3.5rem !default;
+$button-huge-padding: 1.65rem 4rem !default;
 
 // Margin
 $button-default-margin: 1rem !default;
 
 //Fontsize
-$button-default-font-size:  1rem !default;
+$button-default-font-size: 1rem !default;
 
 $button-small-font-size: 0.8rem !default;
-$button-large-font-size: 1.5rem  !default;
-$button-huge-font-size: 2.5rem  !default;
+$button-large-font-size: 1.5rem !default;
+$button-huge-font-size: 2.5rem !default;
 
 // Features
 $button-border-radius: 5px !default;
@@ -49,125 +49,151 @@ $button-border-width: 1px !default;
 	display: inline-block;
 	position: relative;
 	outline: none;
+	background: transparent;
 	border: none;
 	white-space: nowrap;
 	text-align: center;
 	cursor: pointer;
 	text-decoration: none !important;
-	@include box-shadow ($button-shadow-x-offset $button-shadow-y-offset $button-shadow-size $button-shadow-blur rgba($button-shadow-color, $button-shadow-color-opacity));
+	@include transition(box-shadow 0.2s ease-in);
+	@include box-shadow($button-shadow-x-offset $button-shadow-y-offset $button-shadow-size $button-shadow-blur rgba($button-shadow-color, $button-shadow-color-opacity));
 
-	&:hover {
 
-	}
 	&.hoverable {
+		&:hover {
+			@include box-shadow($button-shadow-x-offset $button-shadow-y-offset $button-shadow-size * 2 $button-shadow-blur * 2 rgba($button-shadow-color, $button-shadow-color-opacity ));
+		}
 	}
+
 	&.bordered {
 		border: $button-border-width solid $button-border-color;
 	}
+
 	&.primary {
 		background: $button-bg-primary;
 		color: $button-text-primary;
 	}
+
 	&.secundary {
 		background: $button-bg-secundary;
 		color: $button-text-secundary;
 	}
+
 	&.no-shadow {
-		@include box-shadow (none);
+		@include box-shadow(none);
 	}
+
 	&.round-corners {
 		@include border-radius($button-border-radius);
 	}
+
 	&.white {
 		color: black;
 		background: white;
 		@include box-shadow($button-shadow-x-offset $button-shadow-y-offset $button-shadow-size $button-shadow-blur rgba($button-shadow-color, $button-shadow-color-opacity), inset 1px 1px 1px -1px rgba(0, 0, 0, 0.6));
 	}
+
 	&.black {
 		color: white;
 		background: black;
 	}
+
 	&.circle {
 		padding: 0 !important;
 		width: $button-default-font-size * 2;
 		height: $button-default-font-size * 2;
 		@include border-radius(100%);
+
 		&.small {
 			width: $button-small-font-size * 1.5;
 			height: $button-small-font-size * 1.5;
 		}
+
 		&.large {
 			width: $button-large-font-size * 2;
 			height: $button-large-font-size * 2;
 		}
+
 		&.huge {
 			width: $button-huge-font-size * 2;
 			height: $button-huge-font-size * 2;
 		}
 	}
+
 	&.uppercase {
 		text-transform: uppercase;
 	}
+
 	&.small {
-		font-size:$button-small-font-size;
-		line-height:$button-small-font-size;
+		font-size: $button-small-font-size;
+		line-height: $button-small-font-size;
 		padding: $button-small-padding;
 	}
+
 	&.large {
-		font-size:$button-large-font-size;
-		line-height:$button-large-font-size;
+		font-size: $button-large-font-size;
+		line-height: $button-large-font-size;
 		padding: $button-large-padding;
 	}
+
 	&.huge {
-		font-size:$button-huge-font-size;
-		line-height:$button-huge-font-size;
+		font-size: $button-huge-font-size;
+		line-height: $button-huge-font-size;
 		padding: $button-huge-padding;
 	}
+
 	&.disabled {
 		cursor: default !important;
-		@include opacity (0.4);
+		@include opacity(0.4);
 	}
+
 	&.margin-right {
 		margin-right: $button-default-margin;
 	}
+
 	&.margin-left {
 		margin-left: $button-default-margin;
 	}
+
 	&.left-icon {
 		// A bit of magic
 		@if(length($button-default-padding) > 1){
-			padding-left: calc(#{$icon-size} + #{nth($button-default-padding,1)});
+			padding-left: calc( #{$icon-size} + #{nth($button-default-padding,1)} );
 		} @else {
-			padding-left: calc(#{$icon-size} + #{$button-default-padding});
+			padding-left: calc( #{$icon-size} + #{$button-default-padding} );
 		}
+
 		i {
-			@if(length($button-default-padding) > 1){
-				left: nth($button-default-padding,1);
+			@if length($button-default-padding) > 1 {
+				left: nth($button-default-padding, 1);
 			} @else {
 				left: $button-default-padding;
 			}
 		}
-
 	}
+
 	&.right-icon {
 		// A bit of magic
 		@if(length($button-default-padding) > 1){
-			padding-right: calc(#{$icon-size} + #{nth($button-default-padding,1)});
+			padding-right: calc( #{$icon-size} + #{nth($button-default-padding,1)} );
 		} @else {
-			padding-right: calc(#{$icon-size} + #{$button-default-padding});
+			padding-right: calc( #{$icon-size} + #{$button-default-padding} );
 		}
+
 		i {
-			@if(length($button-default-padding) > 1){
-				right: nth($button-default-padding,1);
+			@if length($button-default-padding) > 1 {
+				right: nth($button-default-padding, 1);
 			} @else {
 				right: $button-default-padding;
 			}
 		}
 	}
+
+
 	&.center-icon {
 		i {
-			left:50%;
-			margin-left: - $icon-size / 2;
+			left: 50%;
+			margin-left: -$icon-size / 2;
 		}
 	}
 
