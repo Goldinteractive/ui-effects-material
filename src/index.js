@@ -50,11 +50,17 @@ class Material {
 
 	generateRipple(e) {
 
-		var $el, $ripple, d, x, y, pointer;
+		var deferredRedirect, $el, $ripple, d, x, y, pointer;
 
 		pointer = this.getCoordinates(e);
 
 		$el = $(e.currentTarget);
+		deferredRedirect = $el[0].tagName === 'A' && !$el.hasClass('bypass');
+
+		if (deferredRedirect) {
+			e.preventDefault();
+		}
+
 		// Create the DOM node to generate the ripple effect
 		$ripple = $('<span class="ripple"></span>');
 
@@ -83,7 +89,7 @@ class Material {
 			.one(this.supportCssAnimations.end, (e) => {
 
 				// browse to the page if this is a link
-				if ($el[0].tagName === 'A') {
+				if (deferredRedirect) {
 					window.location.href = $el[0].href;
 				}
 
@@ -103,7 +109,7 @@ class Material {
 			return;
 		}
 
-		this.$container.on(`${(_isTouch ? 'touchstart': 'mousedown')}.material`, '.ui-effects-material', (e) => this.generateRipple(e));
+		this.$container.on(`${(_isTouch ? 'touchstart': 'click')}.material dbclick.material`, '.ui-effects-material', (e) => this.generateRipple(e));
 
 	}
 
