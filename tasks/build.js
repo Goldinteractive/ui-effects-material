@@ -12,8 +12,7 @@ var gulp = require('gulp'),
 gulp.task('build', function () {
 	return gulp.src('src/index.js')
 		.pipe(to5({
-			blacklist: ['useStrict'],
-			modules: 'commonInterop'
+			blacklist: ['useStrict']
 		}))
 		.pipe(wrap(startFrag + '\n<%= contents %>\n' + endFrag))
 		  .on('error', gutil.log)
