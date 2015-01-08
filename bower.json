@@ -15,9 +15,6 @@
   ],
   "dependencies": {
     "jquery": "~2.1.1",
-    "gi-ui-buttons": "~0.1.0"
-  },
-  "resolutions": {
     "gi-ui-buttons": "master"
   }
 }
