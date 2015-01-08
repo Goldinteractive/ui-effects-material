@@ -22,7 +22,8 @@
 "use strict";
 
 var _supportCssAnimations = (function () {
-  var el = document.createElement("Material"), animEndEvents = {
+  var el = document.createElement("Material"),
+      animEndEvents = {
     WebkitAnimation: "webkitAnimationEnd",
     MozAnimation: "animationend",
     OAnimation: "oAnimationEnd oanimationend",
@@ -36,76 +37,99 @@ var _supportCssAnimations = (function () {
       };
     }
   }
+
   return false;
-})(), _isTouch = "ontouchstart" in window;
+})(),
+    _isTouch = ("ontouchstart" in window);
 
-var Material = (function () {
-  var Material = function Material($container) {
-    if ($container === undefined) $container = $("body");
-    this.supportCssAnimations = _supportCssAnimations;
-    this.$container = $container;
-    this.bind();
-  };
+var Material = function Material() {
+  var _this = this;
+  var $container = arguments[0] === undefined ? $("body") : arguments[0];
+  return (function () {
+    _this.supportCssAnimations = _supportCssAnimations;
+    _this.$container = $container;
+    _this.bind();
+  })();
+};
 
-  Material.prototype.getCoordinates = function (e) {
-    return e.originalEvent.targetTouches ? e.originalEvent.targetTouches[0] : e;
-  };
+/**
+ * 	Get the right mouse/finger coordinates
+ */
 
-  Material.prototype.generateRipple = function (e) {
-    var $el, $ripple, d, x, y, pointer;
+Material.prototype.getCoordinates = function (e) {
+  return e.originalEvent.targetTouches ? e.originalEvent.targetTouches[0] : e;
+};
 
-    pointer = this.getCoordinates(e);
+/**
+ *  Append the ripple to the body and let it grow
+ */
 
-    $el = $(e.currentTarget);
-    // Create the DOM node to generate the ripple effect
-    $ripple = $("<span class=\"ripple\"></span>");
+Material.prototype.generateRipple = function (e) {
+  var $el, $ripple, d, x, y, pointer;
 
-    // append it to the element clicked
-    $el.prepend($ripple);
+  pointer = this.getCoordinates(e);
 
-    //use $el's width or height whichever is larger for the diameter to make a circle which can cover the entire element.
-    d = Math.max($el.outerWidth(), $el.outerHeight());
-    $ripple.css({
-      height: d,
-      width: d
-    });
+  $el = $(e.currentTarget);
+  // Create the DOM node to generate the ripple effect
+  $ripple = $("<span class=\"ripple\"></span>");
 
-    //get click coordinates
-    //logic = click coordinates relative to page - $el's position relative to page - half of self height/width to make it controllable from the center;
-    x = pointer.pageX - $el.offset().left - d / 2;
-    y = pointer.pageY - $el.offset().top - d / 2;
+  // append it to the element clicked
+  $el.prepend($ripple);
 
-    //set the position and add class .animate
-    $ripple.css({
-      top: "" + y + "px",
-      left: "" + x + "px"
-    }).addClass("animate")
-    // remove the element once the animation is finished
-    .one(this.supportCssAnimations.end, function (e) {
-      return $ripple.remove();
-    });
-  };
+  //use $el's width or height whichever is larger for the diameter to make a circle which can cover the entire element.
+  d = Math.max($el.outerWidth(), $el.outerHeight());
+  $ripple.css({
+    height: d,
+    width: d
+  });
 
-  Material.prototype.bind = function () {
-    var _this = this;
+  //get click coordinates
+  //logic = click coordinates relative to page - $el's position relative to page - half of self height/width to make it controllable from the center;
+  x = pointer.pageX - $el.offset().left - d / 2;
+  y = pointer.pageY - $el.offset().top - d / 2;
 
-
-    if (!this.supportCssAnimations) {
-      return;
+  //set the position and add class .animate
+  $ripple.css({
+    top: "" + y + "px",
+    left: "" + x + "px"
+  }).addClass("animate")
+  // remove the element once the animation is finished
+  .one(this.supportCssAnimations.end, function (e) {
+    // browse to the page if this is a link
+    if ($el[0].tagName === "A") {
+      window.location.href = $el[0].href;
     }
-    this.$container.on("" + (_isTouch ? "touchstart" : "mousedown") + ".material", ".ui-effects-material", function (e) {
-      return _this.generateRipple(e);
-    });
-  };
 
-  Material.prototype.unbind = function () {
-    if (!this.supportCssAnimations) {
-      return;
-    }
-    this.$container.off(".material");
-  };
+    $ripple.remove();
+  });
+};
 
-  return Material;
-})();
+/**
+ *  Bind the UI touch/click events
+ */
+
+Material.prototype.bind = function () {
+  var _this2 = this;
+
+
+  if (!this.supportCssAnimations) {
+    return;
+  }
+
+  this.$container.on("" + (_isTouch ? "touchstart" : "mousedown") + ".material", ".ui-effects-material", function (e) {
+    return _this2.generateRipple(e);
+  });
+};
+
+/**
+ *  Kill the the UI touch/click events
+ */
+
+Material.prototype.unbind = function () {
+  if (!this.supportCssAnimations) {
+    return;
+  }
+  this.$container.off(".material");
+};
 	return Material;
 }));
