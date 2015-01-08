@@ -65,12 +65,14 @@ Material.prototype.getCoordinates = function (e) {
  */
 
 Material.prototype.generateRipple = function (e) {
-  var deferredRedirect, $el, $ripple, d, x, y, pointer;
+  var deferredRedirect, $el, $link, $ripple, d, x, y, pointer;
 
   pointer = this.getCoordinates(e);
 
   $el = $(e.currentTarget);
-  deferredRedirect = $el[0].tagName === "A" && !$el.hasClass("bypass");
+  $link = $el[0].tagName === "A" ? $el : $(e.target);
+
+  deferredRedirect = $link[0].tagName === "A" && !$el.hasClass("bypass");
 
   if (deferredRedirect) {
     e.preventDefault();
@@ -103,7 +105,7 @@ Material.prototype.generateRipple = function (e) {
   .one(this.supportCssAnimations.end, function (e) {
     // browse to the page if this is a link
     if (deferredRedirect) {
-      window.location.href = $el[0].href;
+      window.location.href = $link[0].href;
     }
 
     $ripple.remove();
