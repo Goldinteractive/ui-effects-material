@@ -1,6 +1,6 @@
 {
   "name": "ui-buttons",
-  "version": "0.2.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/Goldinteractive/ui-buttons",
   "authors": [
     "gold interactive"
@@ -16,14 +16,5 @@
   ],
   "dependencies": {
     "gi-scss-mixins": "~0.2.0"
-  },
-  "_release": "0.2.0",
-  "_resolution": {
-    "type": "version",
-    "tag": "0.2.0",
-    "commit": "a991f6e93ec512118554b90ea608c1e5b487b6ab"
-  },
-  "_source": "git://github.com/Goldinteractive/ui-buttons.git",
-  "_target": "*",
-  "_originalSource": "gi-ui-buttons"
+  }
 }

@@ -1,0 +1,14 @@
+{
+  "name": "gi-scss-global-variables",
+  "homepage": "https://github.com/Goldinteractive/scss-global-variables",
+  "version": "0.0.2",
+  "_release": "0.0.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.0.2",
+    "commit": "60234445203358740de295d8c447dabe56802c4f"
+  },
+  "_source": "git://github.com/Goldinteractive/scss-global-variables.git",
+  "_target": "~0.0.1",
+  "_originalSource": "gi-scss-global-variables"
+}

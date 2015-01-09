@@ -1,0 +1,24 @@
+@import "bower_components/gi-scss-mixins/vendor/compass";
+@import "style";
+
+button {
+	margin:10px;
+	float:left;
+	clear:both;
+}
+button:before {
+	left:100%;
+	top:50%;
+	font-size: 1rem;
+	margin-left: 10px;
+	margin-top:-0.5rem;
+	position: absolute;
+	color:black;
+	content: ' class: ( 'attr(class) ' )' ;
+}
+i {
+	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAYAAACoPemuAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAATVJREFUWIXtlj1Ow0AQRr9d0/oK3IG1rxG31CjiOsABInECmtBR2X12fIcoF6CgQTAfTSwRS4l3/UPDPsmF5ZnZ59XaM0AikUgk/hcmJKgsy4qkm2NBklsRkaG4q5BiqloZY9bTtQAABwDziHV474N2+BxFUTA0NkoscPFrknfGmN8vUXvv65g6s4t57/fOuXcADzg9w3VMHTunVIeIPKnqWlW/x9ZYRAwA2rZ9zrLsFsDnmPzFxABgt9u9kFyR/IjNXVQMAETkLc/zx9i8xcUAoGmar9icPxEbQxKLJeoHG9NSphIkZq3dkjyce66qlbX25nj7istNerCBA4FjzxDOuU03fZC8F5HN1JqjxPrz2aUdC52/+oxq4v35zNqTb2h1vDqC5q9ZxIbOXI9oqUQikUgsyA+n1HIzLAkSHwAAAABJRU5ErkJggg==');
+	background-repeat: no-repeat;
+	width: 38px;
+	height: 38px;
+}

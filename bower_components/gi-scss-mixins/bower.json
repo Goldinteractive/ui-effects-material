@@ -1,0 +1,19 @@
+{
+  "name": "gi-scss-mixins",
+  "version": "0.0.2",
+  "homepage": "https://github.com/Goldinteractive/scss-mixins",
+  "authors": [
+    "gold interactive"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "gi-scss-global-variables": "~0.0.1"
+  }
+}
