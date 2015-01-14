@@ -111,7 +111,7 @@ class Material {
 			return;
 		}
 
-		this.$container.on(`${(_isTouch ? 'touchstart': 'click')}.material dbclick.material`, '.ui-effects-material', (e) => this.generateRipple(e));
+		this.$container.on('click.material dbclick.material', '.ui-effects-material', (e) => this.generateRipple(e));
 
 	}
 
