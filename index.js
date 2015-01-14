@@ -21,6 +21,11 @@
 
 "use strict";
 
+var _prototypeProperties = function (child, staticProps, instanceProps) {
+  if (staticProps) Object.defineProperties(child, staticProps);
+  if (instanceProps) Object.defineProperties(child.prototype, instanceProps);
+};
+
 var _supportCssAnimations = (function () {
   var el = document.createElement("Material"),
       animEndEvents = {
@@ -42,102 +47,128 @@ var _supportCssAnimations = (function () {
 })(),
     _isTouch = ("ontouchstart" in window);
 
-var Material = function Material() {
-  var _this = this;
-  var $container = arguments[0] === undefined ? $("body") : arguments[0];
-  return (function () {
-    _this.supportCssAnimations = _supportCssAnimations;
-    _this.$container = $container;
-    _this.bind();
-  })();
-};
+var Material = (function () {
+  function Material() {
+    var $container = arguments[0] === undefined ? $("body") : arguments[0];
 
-/**
- * 	Get the right mouse/finger coordinates
- */
 
-Material.prototype.getCoordinates = function (e) {
-  return e.originalEvent.targetTouches ? e.originalEvent.targetTouches[0] : e;
-};
-
-/**
- *  Append the ripple to the body and let it grow
- */
-
-Material.prototype.generateRipple = function (e) {
-  var deferredRedirect, $el, $link, $ripple, d, x, y, pointer;
-
-  pointer = this.getCoordinates(e);
-
-  $el = $(e.currentTarget);
-  $link = $el[0].tagName === "A" ? $el : $(e.target);
-
-  deferredRedirect = $link[0].tagName === "A" && !$el.hasClass("bypass");
-
-  if (deferredRedirect) {
-    e.preventDefault();
+    this.supportCssAnimations = _supportCssAnimations;
+    this.$container = $container;
+    this.bind();
   }
 
-  // Create the DOM node to generate the ripple effect
-  $ripple = $("<span class=\"ripple\"></span>");
+  _prototypeProperties(Material, null, {
+    getCoordinates: {
 
-  // append it to the element clicked
-  $el.prepend($ripple);
+      /**
+       * 	Get the right mouse/finger coordinates
+       */
 
-  //use $el's width or height whichever is larger for the diameter to make a circle which can cover the entire element.
-  d = Math.max($el.outerWidth(), $el.outerHeight());
-  $ripple.css({
-    height: d,
-    width: d
-  });
+      value: function (e) {
+        return e.originalEvent.targetTouches ? e.originalEvent.targetTouches[0] : e;
+      },
+      writable: true,
+      enumerable: true,
+      configurable: true
+    },
+    generateRipple: {
 
-  //get click coordinates
-  //logic = click coordinates relative to page - $el's position relative to page - half of self height/width to make it controllable from the center;
-  x = pointer.pageX - $el.offset().left - d / 2;
-  y = pointer.pageY - $el.offset().top - d / 2;
+      /**
+       *  Append the ripple to the body and let it grow
+       */
 
-  //set the position and add class .animate
-  $ripple.css({
-    top: "" + y + "px",
-    left: "" + x + "px"
-  }).addClass("animate")
-  // remove the element once the animation is finished
-  .one(this.supportCssAnimations.end, function (e) {
-    // browse to the page if this is a link
-    if (deferredRedirect) {
-      window.location.href = $link[0].href;
+      value: function (e) {
+        var deferredRedirect, $el, $link, $ripple, d, x, y, pointer;
+
+        pointer = this.getCoordinates(e);
+
+        $el = $(e.currentTarget);
+        $link = $el[0].tagName === "A" ? $el : $(e.target);
+
+        deferredRedirect = $link[0].tagName === "A" && !$el.hasClass("bypass");
+
+        if (deferredRedirect) {
+          e.preventDefault();
+        }
+
+        // Create the DOM node to generate the ripple effect
+        $ripple = $("<span class=\"ripple\"></span>");
+
+        // append it to the element clicked
+        $el.prepend($ripple);
+
+        //use $el's width or height whichever is larger for the diameter to make a circle which can cover the entire element.
+        d = Math.max($el.outerWidth(), $el.outerHeight());
+        $ripple.css({
+          height: d,
+          width: d
+        });
+
+        //get click coordinates
+        //logic = click coordinates relative to page - $el's position relative to page - half of self height/width to make it controllable from the center;
+        x = pointer.pageX - $el.offset().left - d / 2;
+        y = pointer.pageY - $el.offset().top - d / 2;
+
+        //set the position and add class .animate
+        $ripple.css({
+          top: "" + y + "px",
+          left: "" + x + "px"
+        }).addClass("animate")
+        // remove the element once the animation is finished
+        .one(this.supportCssAnimations.end, function (e) {
+          // browse to the page if this is a link
+          if (deferredRedirect) {
+            window.location.href = $link[0].href;
+          }
+
+          $ripple.remove();
+        });
+      },
+      writable: true,
+      enumerable: true,
+      configurable: true
+    },
+    bind: {
+
+      /**
+       *  Bind the UI touch/click events
+       */
+
+      value: function () {
+        var _this = this;
+
+
+        if (!this.supportCssAnimations) {
+          return;
+        }
+
+        this.$container.on("click.material dbclick.material", ".ui-effects-material", function (e) {
+          return _this.generateRipple(e);
+        });
+      },
+      writable: true,
+      enumerable: true,
+      configurable: true
+    },
+    unbind: {
+
+      /**
+       *  Kill the the UI touch/click events
+       */
+
+      value: function () {
+        if (!this.supportCssAnimations) {
+          return;
+        }
+        this.$container.off(".material");
+      },
+      writable: true,
+      enumerable: true,
+      configurable: true
     }
-
-    $ripple.remove();
   });
-};
 
-/**
- *  Bind the UI touch/click events
- */
-
-Material.prototype.bind = function () {
-  var _this2 = this;
-
-
-  if (!this.supportCssAnimations) {
-    return;
-  }
-
-  this.$container.on("" + (_isTouch ? "touchstart" : "click") + ".material dbclick.material", ".ui-effects-material", function (e) {
-    return _this2.generateRipple(e);
-  });
-};
-
-/**
- *  Kill the the UI touch/click events
- */
-
-Material.prototype.unbind = function () {
-  if (!this.supportCssAnimations) {
-    return;
-  }
-  this.$container.off(".material");
-};
+  return Material;
+})();
 	return Material;
 }));
