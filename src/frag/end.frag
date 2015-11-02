@@ -1,2 +1,2 @@
-	return Material;
+	return Material
 }));

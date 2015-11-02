@@ -16,6 +16,6 @@
   "dependencies": {
     "jquery": "~2.1.1",
     "gi-ui-buttons": "*",
-    "gi-scss-mixins": "~0.2.0"
+    "gi-scss-mixins": "~0.3.0"
   }
 }

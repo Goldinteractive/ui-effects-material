@@ -5,7 +5,7 @@ $ripple-animation-speed: 0.35s !default;
 .ui-effects-material {
 	overflow: hidden;
 	position: relative;
-	@include transform(translate3d(0, 0, 0));
+	transform: translate3d(0, 0, 0);
 }
 
 //.ripple styles - the elements which will create the ripple effect. The size and position of these elements will be set by the JS code. Initially these elements will be scaled down to 0% and later animated to large fading circles on user click.
@@ -14,23 +14,23 @@ $ripple-animation-speed: 0.35s !default;
 	position: absolute;
 	background: $ripple-light-color;
 	border-radius: 100%;
-	@include transform(scale(0));
+	transform: scale(0);
 
 	.dark-ripple & {
 		background: $ripple-dark-color;
 	}
 
 	&.animate {
-		@include animation(ripple $ripple-animation-speed linear);
+		animation: ripple $ripple-animation-speed linear;
 	}
 }
 
 //animation effect
 
-@include keyframes(ripple) {
+@keyframes ripple {
 	//scale the element to 250% to safely cover the entire link and fade it out
 	100% {
 		opacity: 0;
-		@include transform(scale(2.5));
+		transform: scale(2.5);
 	}
 }
